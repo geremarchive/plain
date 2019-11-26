@@ -3,7 +3,6 @@ package funcs
 import (
 	"strconv"
 	"strings"
-	//"github.com/gdamore/tcell"
 )
 
 func Convert0to19(num int) (out string) {
@@ -77,9 +76,3 @@ func ConvertMinute(minute int) (out string) {
 
 	return
 }
-
-/*func Addstr(s tcell.Screen, style tcell.Style, x int, y int, text string) {
-	for i := x; i < len(text)+x; i++ {
-		s.SetContent(i, y, rune(text[i-x]), []rune(""), style)
-	}
-}*/

@@ -6,7 +6,6 @@ import (
 	"time"
 	"strconv"
 	"github.com/geremachek/escape"
-	//"github.com/gdamore/tcell"
 	fu "./funcs"
 )
 
@@ -49,29 +48,24 @@ func main() {
 					space = true
 				} else if rune(elem) == 'b' {
 					bold = true
-				} else if rune(elem) == 'l' {
-					live = true
 				}
 			}
-			if live {
-				//
+
+			if us {
+				i, _ := strconv.Atoi(t.Format("3"))
+				hour = i
+				xm = t.Format(" PM")
+			}
+
+			if bold {
+				esc = escape.Vint(1)
+				esce = escape.Vint(0)
+			}
+
+			if space {
+				fmt.Print("\n " + esc + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + esce + "\n\n")
 			} else {
-				if us {
-					i, _ := strconv.Atoi(t.Format("3"))
-					hour = i
-					xm = t.Format(" PM")
-				}
-
-				if bold {
-					esc = escape.Vint(1)
-					esce = escape.Vint(0)
-				}
-
-				if space {
-					fmt.Print("\n " + esc + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + esce + "\n\n")
-				} else {
-					fmt.Println(esc + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + esce)
-				}
+				fmt.Println(esc + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + esce)
 			}
 
 		} else {
