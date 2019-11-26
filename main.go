@@ -52,7 +52,7 @@ func main() {
 			if us {
 				i, _ := strconv.Atoi(t.Format("3"))
 				hour = i
-				xm = t.Format(" AM")
+				xm = t.Format(" PM")
 			}
 
 			if bold {
