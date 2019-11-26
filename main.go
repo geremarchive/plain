@@ -24,7 +24,8 @@ var (
 
 	hour int
 	xm string
-	esc int = 0
+	esc string = ""
+	esce string = ""
 )
 
 func main() {
@@ -56,13 +57,14 @@ func main() {
 			}
 
 			if bold {
-				esc = 1
+				esc = escape.Vint(1)
+				esce = escape.Vint(0)
 			}
 
 			if space {
-				fmt.Print("\n " + escape.Vint(esc) + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + escape.Vint(0) + "\n\n")
+				fmt.Print("\n " + esc + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + esce + "\n\n")
 			} else {
-				fmt.Println(escape.Vint(esc) + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + escape.Vint(0))
+				fmt.Println(esc + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + esce)
 			}
 
 		} else {
