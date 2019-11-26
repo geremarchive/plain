@@ -1,4 +1,4 @@
-# conch
+# warlock
 
 🔮 warlock, a simple plain english clock
 
