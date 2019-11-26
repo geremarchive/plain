@@ -69,7 +69,7 @@ func ConvertMinute(minute int) (out string) {
 	if minute < 10 {
 		out = "o'" + strings.ToLower(Convert0to19(minute))
 	} else if minute < 20 {
-		out = Convert0to19(minute)
+		out = strings.ToLower(Convert0to19(minute))
 	} else if minute < 60 {
 		out = Convert10s(minute)
 	}
