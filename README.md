@@ -1,8 +1,8 @@
-# warlock
+<h1 align="center">warlock 🔮</center>
 
-🔮 warlock, a simple plain english clock
+<p align="center">A simple plain english clock</p>
 
-<img src="scrot.png"></img>
+<img align+"center"src="scrot.png">
 
 # Dependencies
 
