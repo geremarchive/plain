@@ -2,7 +2,7 @@
 
 <p align="center">A simple plain english clock</p>
 
-<img align+"center"src="scrot.png">
+<img align="center"src="scrot.png">
 
 # Dependencies
 
