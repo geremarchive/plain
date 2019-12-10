@@ -6,7 +6,7 @@ import (
 	"time"
 	"strconv"
 	"github.com/geremachek/escape"
-	fu "./funcs"
+	fu "warlock/funcs"
 )
 
 const help = `Usage: warlock [OPTION]...
