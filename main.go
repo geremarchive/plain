@@ -6,6 +6,7 @@ import (
 	"time"
 	"strconv"
 	"github.com/geremachek/escape"
+	flag "github.com/spf13/pflag"
 	fu "warlock/funcs"
 )
 
@@ -13,16 +14,11 @@ const help = `Usage: warlock [OPTION]...
 A simple plain english clock
 
 --help, -h: Display this information
--u: Use the U.S. standard AM/PM time
--s: Put spacing around the text
--b: Use bold text`
+--us, -u: Use the U.S. standard AM/PM time
+--spaced, -s: Put spacing around the text
+--bold, -b: Use bold text`
 
 var (
-	us bool
-	space bool
-	bold bool
-	live bool
-
 	hour int
 	xm string
 	esc string = ""
@@ -30,46 +26,37 @@ var (
 )
 
 func main() {
-	argument := os.Args[1:]
+
 	t := time.Now()
 
 	hour = t.Hour()
 
-	if len(argument) == 0 {
+	if len(os.Args) == 1 {
 		fmt.Println(fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()))
+	} else if os.Args[1] == "-h" || os.Args[1] == "--help" {
+		fmt.Println(help)
 	} else {
-		if argument[0] == "--help" || argument[0] == "-h" {
-			fmt.Println(help)
-		} else if rune(string(argument[0])[0]) == '-' {
-			for _, elem := range string(argument[0])[1:] {
-				if rune(elem) == 'u' {
-					us = true
-				} else if rune(elem) == 's' {
-					space = true
-				} else if rune(elem) == 'b' {
-					bold = true
-				}
-			}
+		us := flag.BoolP("us", "u", false, "Use the U.S. standard AM/PM time")
+		space := flag.BoolP("spaced", "s", false, "Put spacing around the text")
+		bold := flag.BoolP("bold", "b", false, "Use bold text")
 
-			if us {
-				i, _ := strconv.Atoi(t.Format("3"))
-				hour = i
-				xm = t.Format(" PM")
-			}
+		flag.Parse()
 
-			if bold {
-				esc = escape.Vint(1)
-				esce = escape.Vint(0)
-			}
+		if *us {
+			i, _ := strconv.Atoi(t.Format("3"))
+			hour = i
+			xm = t.Format(" PM")
+		}
 
-			if space {
-				fmt.Print("\n " + esc + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + esce + "\n\n")
-			} else {
-				fmt.Println(esc + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + esce)
-			}
+		if *bold {
+			esc = escape.Vint(1)
+			esce = escape.Vint(0)
+		}
 
+		if *space {
+			fmt.Print("\n " + esc + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + esce + "\n\n")
 		} else {
-			fmt.Println(escape.Vint(31, 1) + "Error: '" + argument[0] + "' is not a valid option" + escape.Vint(0))
+			fmt.Println(esc + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + esce)
 		}
 	}
 }

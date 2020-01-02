@@ -10,6 +10,10 @@
 go get -u github.com/geremachek/escape
 ```
 
+```
+go get -u github.com/spf13/pflag
+```
+
 # What is it?
  
 A command that displays the time in plain english.
