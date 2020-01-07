@@ -26,13 +26,24 @@ var (
 )
 
 func main() {
-
 	t := time.Now()
 
 	hour = t.Hour()
 
 	if len(os.Args) == 1 {
-		fmt.Println(fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()))
+		convmin, err := fu.ConvertMinute(t.Minute())
+
+		if err != nil {
+			panic(err)
+		}
+
+		convhour, err := fu.ConvertHour(hour)
+
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Println(convhour + " " + convmin)
 	} else if os.Args[1] == "-h" || os.Args[1] == "--help" {
 		fmt.Println(help)
 	} else {
@@ -43,7 +54,12 @@ func main() {
 		flag.Parse()
 
 		if *us {
-			i, _ := strconv.Atoi(t.Format("3"))
+			i, err := strconv.Atoi(t.Format("3"))
+
+			if err != nil {
+				panic(err)
+			}
+
 			hour = i
 			xm = t.Format(" PM")
 		}
@@ -53,10 +69,22 @@ func main() {
 			esce = escape.Vint(0)
 		}
 
+		convmin, err := fu.ConvertMinute(t.Minute())
+
+		if err != nil {
+			panic(err)
+		}
+
+		convhour, err := fu.ConvertHour(hour)
+
+		if err != nil {
+			panic(err)
+		}
+
 		if *space {
-			fmt.Print("\n " + esc + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + esce + "\n\n")
+			fmt.Print("\n " + esc + convhour + " " + convmin + xm + esce + "\n\n")
 		} else {
-			fmt.Println(esc + fu.ConvertHour(hour) + " " + fu.ConvertMinute(t.Minute()) + xm + esce)
+			fmt.Println(esc + convhour + " " + convmin + xm + esce)
 		}
 	}
 }

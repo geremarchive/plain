@@ -33,7 +33,7 @@ func Convert0to19(num int) (out string) {
 	return
 }
 
-func Convert10s(num int) (out string) {
+func Convert10s(num int) (out string, err error) {
 	var prefix string
 	strt := strconv.Itoa(num)
 
@@ -47,7 +47,8 @@ func Convert10s(num int) (out string) {
 	if rune(strt[1]) == '0' {
 		out = prefix
 	} else {
-		i, _ := strconv.Atoi(string(strt[1]))
+		var i int
+		i, err = strconv.Atoi(string(strt[1]))
 		out = prefix + "-" + strings.ToLower(Convert0to19(i))
 	}
 
@@ -55,23 +56,23 @@ func Convert10s(num int) (out string) {
 
 }
 
-func ConvertHour(hour int) (out string) {
+func ConvertHour(hour int) (out string, err error) {
 	if hour < 20 {
 		out = Convert0to19(hour)
 	} else if hour < 25 {
-		out = Convert10s(hour)
+		out, err = Convert10s(hour)
 	}
 
 	return
 }
 
-func ConvertMinute(minute int) (out string) {
+func ConvertMinute(minute int) (out string, err error) {
 	if minute < 10 {
 		out = "o'" + strings.ToLower(Convert0to19(minute))
 	} else if minute < 20 {
 		out = strings.ToLower(Convert0to19(minute))
 	} else if minute < 60 {
-		out = Convert10s(minute)
+		out, err = Convert10s(minute)
 	}
 
 	return
