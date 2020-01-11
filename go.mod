@@ -1,4 +1,4 @@
-module warlock
+module plain
 
 go 1.12
 

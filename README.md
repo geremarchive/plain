@@ -1,4 +1,4 @@
-<h1 align="center">warlock 🔮</h1>
+<h1 align="center">plain 🕰️</h1>
 
 <p align="center">A simple plain english clock</p>
 
@@ -22,7 +22,7 @@ i.e. ```Elven fifty-four AM```
 # Usage
 
 ```
-Usage: warlock [OPTION]...
+Usage: plain [OPTION]...
 A simple plain english clock
 
 --help, -h: Display this information

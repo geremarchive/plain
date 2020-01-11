@@ -7,10 +7,10 @@ import (
 	"strconv"
 	"github.com/geremachek/escape"
 	flag "github.com/spf13/pflag"
-	fu "warlock/funcs"
+	fu "plain/funcs"
 )
 
-const help = `Usage: warlock [OPTION]...
+const help = `Usage: plain [OPTION]...
 A simple plain english clock
 
 --help, -h: Display this information
